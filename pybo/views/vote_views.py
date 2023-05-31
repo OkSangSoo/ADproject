@@ -41,4 +41,7 @@ def vote_comment(request, comment_id):
     else:
         comment.voter.add(request.user)
 
-    return redirect('pybo:detail', question_id=comment.question.id);
+    if comment.answer==None:
+        return redirect('pybo:detail', question_id=comment.question.id)
+    else:
+        return redirect('pybo:detail', question_id=comment.answer.question.id)

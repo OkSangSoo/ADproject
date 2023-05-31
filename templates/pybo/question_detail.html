@@ -61,6 +61,7 @@
                                 - {{ comment.author }}, {{ comment.create_date }}
                                 {% if comment.modify_date %}
                                 (수정:{{ comment.modify_date }})
+                                (수정 횟수 : {{ comment.modify_times }})
                                 {% endif %}
                             </span>
                             {% if request.user == comment.author %}
@@ -136,6 +137,7 @@
                                 - {{ comment.author }}, {{ comment.create_date }}
                                 {% if comment.modify_date %}
                                 (수정:{{ comment.modify_date }})
+                                (수정 횟수 : {{ comment.modify_times }})
                                 {% endif %}
                             </span>
                             {% if request.user == comment.author %}
@@ -143,6 +145,10 @@
                             <a href="#" class="small delete"
                                data-uri="{% url 'pybo:comment_delete_answer' comment.id  %}">삭제</a>
                             {% endif %}
+                            <span class="d-flex justify-content-end">
+                                <a href="#" data-uri="{% url 'pybo:vote_comment' comment.id  %}" class="recommend">추천</a>,
+                                <span>{{ comment.voter.count }}</span>
+                            </span>
                         </div>
                     {% endfor %}
                     </div>
