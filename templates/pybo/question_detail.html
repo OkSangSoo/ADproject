@@ -42,14 +42,17 @@
                             <div>{{ question.create_date }}</div>
                         </div>
                     </div>
-                    {% if request.user == question.author %}
+
                     <div class="my-3 d-flex justify-content-between">
+                        {% if request.user == question.author %}
                         <span>
                         <a href="{% url 'pybo:question_modify' question.id %}"
                            class="btn btn-sm btn-outline-secondary">수정</a>
                         <a href="#" class="delete btn btn-sm btn-outline-secondary"
                            data-uri="{% url 'pybo:question_delete' question.id %}">삭제</a>
                         </span>
+                        {% endif %}
+                        <span></span>
                         <span class="col-2">
                         <select class="form-control so">
                             <option value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
@@ -57,7 +60,7 @@
                         </select>
                     </span>
                     </div>
-                    {% endif %}
+
                     <!-- 질문 댓글 Start -->
                     {% if question.comment_set.count > 0 %}
                     <div class="mt-3">
